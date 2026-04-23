@@ -8,131 +8,193 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        * { box-sizing: border-box; }
+
         body {
             font-family: 'Nunito', sans-serif;
             background: #fef3c7;
             color: #1e293b;
             overflow: hidden;
-            /* Убираем выделение и системные фоны при нажатии */
             -webkit-tap-highlight-color: transparent;
             -webkit-touch-callout: none;
             user-select: none;
             touch-action: none;
+            width: 100dvw;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            padding: clamp(8px, 2vw, 28px);
         }
 
-        /* Убираем синие/белые рамки у всех активных элементов */
         *:focus, *:active {
             outline: none !important;
             -webkit-tap-highlight-color: transparent;
         }
 
         .cookie {
-            width: 60px;
-            height: 60px;
             background-color: #d97706;
-            border: 4px solid #fde68a;
+            border: 3px solid #fde68a;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fef3c7;
-            font-size: 30px;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
             position: absolute;
             z-index: 1000;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         .bowl-hit-zone {
-            width: 240px;
-            height: 140px;
             position: relative;
             display: flex;
             align-items: flex-end;
             justify-content: center;
             cursor: pointer;
             border-radius: 20px;
+            width: clamp(130px, 26vw, 280px);
+            height: clamp(70px, 13vw, 140px);
         }
 
-        /* Стилизация миски через SVG для чистоты (без фона) */
         .bowl-svg {
-            width: 200px;
+            width: 100%;
+            height: 100%;
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
             pointer-events: none;
         }
 
         .animal-icon {
-            font-size: 100px;
-            margin-bottom: -10px;
+            line-height: 1;
+            margin-bottom: -4px;
             transition: transform 0.3s;
+            font-size: clamp(48px, 9vw, 110px);
         }
-        
-        #cookie-box {
-            width: 160px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
-        }
-        #cookie-box:active { transform: scale(0.95); }
 
-        .click-hint {
-            animation: bounce 2s infinite;
+        .animal-name {
+            margin-top: clamp(4px, 1vw, 14px);
             font-weight: 900;
-            color: #92400e;
-            font-size: 14px;
+            font-size: clamp(13px, 2.4vw, 26px);
             text-transform: uppercase;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .bowl-active .bowl-svg {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
+            letter-spacing: -0.02em;
         }
 
         .counter {
             position: absolute;
-            right: 10px;
+            right: clamp(4px, 0.8vw, 12px);
             top: 50%;
+            transform: translateY(-50%);
             background: #ef4444;
             color: white;
-            width: 35px;
-            height: 35px;
+            width: clamp(24px, 3.8vw, 42px);
+            height: clamp(24px, 3.8vw, 42px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
+            font-size: clamp(11px, 1.8vw, 18px);
             border: 3px solid white;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             z-index: 50;
         }
+
+        #cookie-box {
+            cursor: pointer;
+            transition: transform 0.15s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #cookie-box:active { transform: scale(0.95); }
+
+        .box-body {
+            width: clamp(90px, 16vw, 160px);
+            height: clamp(65px, 12vw, 130px);
+            background: #b45309;
+            border-radius: 0 0 14px 14px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 4px solid #92400e;
+        }
+        .box-lid {
+            width: calc(clamp(90px, 16vw, 160px) + 14px);
+            height: clamp(20px, 3.5vw, 34px);
+            background: #92400e;
+            border-radius: 8px;
+        }
+        .box-icon {
+            font-size: clamp(26px, 4.5vw, 50px);
+            color: #fde68a;
+            opacity: 0.5;
+        }
+
+        .click-hint {
+            animation: bounce 2s infinite;
+            font-weight: 900;
+            color: #92400e;
+            font-size: clamp(9px, 1.6vw, 14px);
+            text-transform: uppercase;
+            margin-bottom: clamp(3px, 0.6vw, 8px);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        #btn-done {
+            font-weight: 900;
+            text-transform: uppercase;
+            border-radius: 14px;
+            font-size: clamp(13px, 2.2vw, 22px);
+            padding: clamp(8px, 1.5vw, 16px) clamp(20px, 4vw, 52px);
+        }
+
+        .header-title { font-size: clamp(15px, 3.2vw, 32px); }
+        .header-sub   { font-size: clamp(11px, 2vw, 20px); }
+        .header-icon  { font-size: clamp(22px, 4vw, 44px); }
+
+        .animals-row {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 900px;
+            align-items: flex-end;
+        }
+
+        .bottom-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(6px, 1.5vh, 18px);
+            margin-bottom: clamp(6px, 2vh, 20px);
+        }
     </style>
 </head>
-<body class="h-screen flex flex-col p-6">
+<body>
 
     <!-- Header -->
-    <div class="flex items-center justify-between mb-8">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:clamp(4px,1.2vh,16px);">
         <div>
-            <h1 class="text-3xl font-black text-amber-900 uppercase">Задание №3</h1>
-            <p class="text-xl font-bold text-amber-800/80">Нажимай на печеньки или миски!</p>
+            <h1 class="header-title font-black text-amber-900 uppercase" style="line-height:1.1;">Задание №3</h1>
+            <p class="header-sub font-bold" style="color:#92400e; opacity:0.8; line-height:1.2;">Нажимай на печеньки или миски!</p>
         </div>
-        <div class="bg-white/50 p-2 rounded-full border-2 border-amber-200">
-             <i class="fa-solid fa-face-smile text-4xl text-amber-600"></i>
+        <div style="background:rgba(255,255,255,0.5); padding:8px; border-radius:50%; border:2px solid #fde68a;">
+            <i class="fa-solid fa-face-smile header-icon text-amber-600"></i>
         </div>
     </div>
 
     <!-- Game Area -->
-    <div class="flex-1 flex flex-col items-center justify-between">
-        
-        <div class="flex justify-around w-full max-w-5xl items-center">
+    <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; min-height:0;">
+
+        <!-- Animals -->
+        <div class="animals-row">
+
             <!-- Cat -->
-            <div class="flex flex-col items-center relative" onclick="magnetizeTo('cat')">
-                <div id="icon-cat" class="animal-icon text-purple-500"><i class="fa-solid fa-cat"></i></div>
+            <div style="display:flex; flex-direction:column; align-items:center; position:relative;" onclick="magnetizeTo('cat')">
+                <div id="icon-cat" class="animal-icon" style="color:#a855f7;"><i class="fa-solid fa-cat"></i></div>
                 <div id="zone-cat" class="bowl-hit-zone" data-target="cat">
                     <div id="count-cat" class="counter">0</div>
                     <svg class="bowl-svg" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -140,12 +202,12 @@
                         <ellipse cx="100" cy="20" rx="90" ry="15" fill="#22D3EE"/>
                     </svg>
                 </div>
-                <span class="mt-4 font-black text-purple-900 text-2xl uppercase tracking-tighter">Снежок</span>
+                <span class="animal-name" style="color:#581c87;">Снежок</span>
             </div>
 
             <!-- Dog -->
-            <div class="flex flex-col items-center relative" onclick="magnetizeTo('dog')">
-                <div id="icon-dog" class="animal-icon text-orange-500"><i class="fa-solid fa-dog"></i></div>
+            <div style="display:flex; flex-direction:column; align-items:center; position:relative;" onclick="magnetizeTo('dog')">
+                <div id="icon-dog" class="animal-icon" style="color:#f97316;"><i class="fa-solid fa-dog"></i></div>
                 <div id="zone-dog" class="bowl-hit-zone" data-target="dog">
                     <div id="count-dog" class="counter">0</div>
                     <svg class="bowl-svg" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -153,34 +215,34 @@
                         <ellipse cx="100" cy="20" rx="90" ry="15" fill="#FACC15"/>
                     </svg>
                 </div>
-                <span class="mt-4 font-black text-orange-900 text-2xl uppercase tracking-tighter">Барон</span>
+                <span class="animal-name" style="color:#7c2d12;">Барон</span>
             </div>
         </div>
 
-        <!-- Box Area -->
-        <div class="flex flex-col items-center gap-4 mb-10">
+        <!-- Box + Button -->
+        <div class="bottom-area">
             <div id="cookie-box" onclick="spawnCookie()">
-                <div class="click-hint text-center mb-2">Нажми сюда!</div>
-                <div class="w-40 h-32 bg-amber-700 rounded-b-xl relative flex items-center justify-center border-t-4 border-amber-900">
-                    <div class="absolute -top-4 w-44 h-8 bg-amber-800 rounded-lg"></div>
-                    <i class="fa-solid fa-cookie-bite text-5xl text-amber-200 opacity-50"></i>
+                <div class="click-hint text-center">Нажми сюда!</div>
+                <div class="box-body">
+                    <div class="box-lid" style="position:absolute; top:calc(-1 * clamp(10px,2vw,17px)); left:50%; transform:translateX(-50%);"></div>
+                    <i class="fa-solid fa-cookie-bite box-icon"></i>
                 </div>
             </div>
 
-            <button id="btn-done" onclick="checkFinal()" 
-                class="bg-slate-300 text-white font-black py-4 px-12 rounded-2xl text-2xl shadow-lg opacity-40 pointer-events-none transition-all uppercase">
+            <button id="btn-done" onclick="checkFinal()"
+                style="background:#94a3b8; color:white; opacity:0.4; pointer-events:none; transition:all 0.2s; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
                 Готово!
             </button>
         </div>
     </div>
 
     <!-- Win UI -->
-    <div id="win-ui" class="fixed inset-0 bg-amber-900/90 hidden flex-col items-center justify-center z-[5000] p-6 text-center">
-        <div class="bg-white p-8 rounded-3xl border-8 border-green-400 max-w-sm">
-            <div class="text-8xl mb-4">🍪</div>
-            <h2 class="text-4xl font-black text-slate-800 mb-4 uppercase">Ура!</h2>
-            <p class="text-xl font-bold text-slate-600 mb-8">Ты разделил всё поровну. Друзья довольны!</p>
-            <button onclick="location.reload()" class="bg-green-500 text-white font-black py-4 px-8 rounded-xl text-xl w-full uppercase">Играть ещё</button>
+    <div id="win-ui" style="display:none; position:fixed; inset:0; background:rgba(120,53,15,0.9); flex-direction:column; align-items:center; justify-content:center; z-index:5000; padding:24px; text-align:center;">
+        <div style="background:white; padding:clamp(20px,4vw,40px); border-radius:28px; border:8px solid #4ade80; max-width:380px; width:100%;">
+            <div style="font-size:clamp(56px,12vw,96px); margin-bottom:12px;">🍪</div>
+            <h2 style="font-size:clamp(22px,5vw,40px); font-weight:900; color:#1e293b; text-transform:uppercase; margin-bottom:10px;">Ура!</h2>
+            <p style="font-size:clamp(13px,2.5vw,20px); font-weight:700; color:#475569; margin-bottom:20px;">Ты разделил всё поровну. Друзья довольны!</p>
+            <button onclick="location.reload()" style="background:#22c55e; color:white; font-weight:900; font-size:clamp(15px,3vw,22px); text-transform:uppercase; border-radius:14px; padding:14px 28px; width:100%; border:none; cursor:pointer;">Играть ещё</button>
         </div>
     </div>
 
@@ -190,26 +252,33 @@
         const limit = 10;
         const cookies = [];
 
+        function getCookieSize() {
+            return Math.round(Math.min(Math.max(44, window.innerWidth * 0.07), 70));
+        }
+
         function spawnCookie() {
             if (total >= limit) return;
             total++;
 
             const box = document.getElementById('cookie-box');
             const b = box.getBoundingClientRect();
-            
+            const sz = getCookieSize();
+
             const c = document.createElement('div');
             c.className = 'cookie';
+            c.style.width  = sz + 'px';
+            c.style.height = sz + 'px';
+            c.style.fontSize = Math.round(sz * 0.5) + 'px';
             c.innerHTML = '<i class="fa-solid fa-cookie"></i>';
-            c.style.left = (b.left + b.width/2 - 30) + 'px';
-            c.style.top = (b.top - 20) + 'px';
-            
+            c.style.left = (b.left + b.width / 2 - sz / 2) + 'px';
+            c.style.top  = (b.top - 10) + 'px';
+
             document.body.appendChild(c);
             cookies.push(c);
-            
-            // Вылет
+
             setTimeout(() => {
-                const angle = (Math.random() * Math.PI) + Math.PI; 
-                const d = 120 + Math.random() * 50;
+                const angle = (Math.random() * Math.PI) + Math.PI;
+                const d = 90 + Math.random() * 60;
                 c.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.2)';
                 c.style.transform = `translate(${Math.cos(angle)*d}px, ${Math.sin(angle)*d}px)`;
             }, 10);
@@ -217,8 +286,7 @@
             c.addEventListener('click', (e) => {
                 e.stopPropagation();
                 if (!c.dataset.side) {
-                    const target = counts.cat <= counts.dog ? 'cat' : 'dog';
-                    moveTo(c, target);
+                    moveTo(c, counts.cat <= counts.dog ? 'cat' : 'dog');
                 }
             });
         }
@@ -231,7 +299,8 @@
         function moveTo(el, target) {
             const zone = document.getElementById(`zone-${target}`);
             const r = zone.getBoundingClientRect();
-            
+            const sz = getCookieSize();
+
             if (!el.dataset.side) {
                 counts[target]++;
             } else if (el.dataset.side !== target) {
@@ -240,46 +309,64 @@
             }
 
             el.dataset.side = target;
-            document.getElementById(`count-${target}`).innerText = counts[target];
-            document.getElementById(`count-cat`).innerText = counts.cat;
-            document.getElementById(`count-dog`).innerText = counts.dog;
+            document.getElementById('count-cat').innerText = counts.cat;
+            document.getElementById('count-dog').innerText = counts.dog;
 
-            // Рандом внутри миски
-            const rx = (Math.random() - 0.5) * 100;
-            const ry = (Math.random() - 0.5) * 30;
-            
+            const rx = (Math.random() - 0.5) * r.width  * 0.45;
+            const ry = (Math.random() - 0.5) * r.height * 0.4;
+
             el.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
-            el.style.left = (r.left + r.width / 2 - 30 + rx) + 'px';
-            el.style.top = (r.top + r.height / 2 - 10 + ry) + 'px';
-            el.style.transform = 'scale(0.85) rotate(' + (Math.random()*40-20) + 'deg)';
+            el.style.left = (r.left + r.width  / 2 - sz / 2 + rx) + 'px';
+            el.style.top  = (r.top  + r.height / 2 - sz / 2 + ry) + 'px';
+            el.style.transform = `scale(0.82) rotate(${Math.random()*40-20}deg)`;
 
             updateUI();
         }
 
         function updateUI() {
             const btn = document.getElementById('btn-done');
-            const ready = (counts.cat + counts.dog) === limit;
-            
-            if (ready) {
-                btn.classList.remove('bg-slate-300', 'opacity-40', 'pointer-events-none');
-                btn.classList.add('bg-blue-600', 'opacity-100');
+            if ((counts.cat + counts.dog) === limit) {
+                btn.style.background = '#2563eb';
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
             }
         }
 
         function checkFinal() {
             if (counts.cat === 5 && counts.dog === 5) {
-                document.getElementById('win-ui').classList.remove('hidden');
-                document.getElementById('win-ui').classList.add('flex');
+                const win = document.getElementById('win-ui');
+                win.style.display = 'flex';
             } else {
                 const btn = document.getElementById('btn-done');
-                btn.classList.add('bg-red-500');
-                btn.innerText = "НУЖНО ПОРОВНУ!";
+                const orig = btn.style.background;
+                btn.style.background = '#ef4444';
+                btn.innerText = 'НУЖНО ПОРОВНУ!';
                 setTimeout(() => {
-                    btn.classList.remove('bg-red-500');
-                    btn.innerText = "ГОТОВО!";
+                    btn.style.background = orig;
+                    btn.innerText = 'ГОТОВО!';
                 }, 1200);
             }
         }
+
+        // При повороте/ресайзе — двигаем cookie в миски
+        window.addEventListener('resize', () => {
+            const sz = getCookieSize();
+            cookies.forEach(c => {
+                c.style.width  = sz + 'px';
+                c.style.height = sz + 'px';
+                c.style.fontSize = Math.round(sz * 0.5) + 'px';
+                if (c.dataset.side) {
+                    const zone = document.getElementById(`zone-${c.dataset.side}`);
+                    if (!zone) return;
+                    const r = zone.getBoundingClientRect();
+                    const rx = (Math.random() - 0.5) * r.width  * 0.45;
+                    const ry = (Math.random() - 0.5) * r.height * 0.4;
+                    c.style.transition = 'none';
+                    c.style.left = (r.left + r.width  / 2 - sz / 2 + rx) + 'px';
+                    c.style.top  = (r.top  + r.height / 2 - sz / 2 + ry) + 'px';
+                }
+            });
+        });
     </script>
 </body>
 </html>
